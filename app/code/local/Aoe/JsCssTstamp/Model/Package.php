@@ -1,14 +1,14 @@
 <?php
 
 class Aoe_JsCssTstamp_Model_Package extends Mage_Core_Model_Design_Package {
-	
-	/**
-	 * Overwrite original method in order to add filemtime as parameter 
-	 * 
-	 * @return string
-	 */
+
+    /**
+     * Overwrite original method in order to add filemtime as parameter 
+     * 
+     * @return string
+     */
     public function getMergedJsUrl($files) {
-    	$tstamp = $this->getYoungestFile($files);
+        $tstamp = $this->getYoungestFile($files);
         $targetFilename = md5(implode(',', $files)) . '.' . $tstamp . '.js';
         $targetDir = $this->_initMergerDir('js');
         if (!$targetDir) {
@@ -19,13 +19,13 @@ class Aoe_JsCssTstamp_Model_Package extends Mage_Core_Model_Design_Package {
         }
         return '';
     }
-    	
+
     /**
-	 * Overwrite original method in order to add filemtime as parameter 
-	 * 
-	 * @return string
-	 */
-     public function getMergedCssUrl($files) {
+     * Overwrite original method in order to add filemtime as parameter 
+     * 
+     * @return string
+     */
+    public function getMergedCssUrl($files) {
         // secure or unsecure
         $isSecure = Mage::app()->getRequest()->isSecure();
         $mergerDir = $isSecure ? 'css_secure' : 'css';
@@ -43,26 +43,26 @@ class Aoe_JsCssTstamp_Model_Package extends Mage_Core_Model_Design_Package {
         }
 
         // merge into target file
-    	$tstamp = $this->getYoungestFile($files);
+        $tstamp = $this->getYoungestFile($files);
         $targetFilename = md5(implode(',', $files) . "|{$hostname}|{$port}") . $tstamp . '.css';
         if ($this->_mergeFiles($files, $targetDir . DS . $targetFilename, false, array($this, 'beforeMergeCss'), 'css')) {
             return $baseMediaUrl . $mergerDir . '/' . $targetFilename;
         }
         return '';
-     }
-     
-     /**
-      * Get the timestamp of the youngest file
-      * 
-      * @param array $files
-      * @return int tstamp
-      */
-     protected function getYoungestFile($files) {
-     	$tstamp = null;
-     	foreach ($files as $file) {
-     		$tstamp = is_null($tstamp) ? filemtime($file) : max($tstamp, filemtime($file));
-     	}
-     	return $tstamp;
-     }
-	
+    }
+
+    /**
+     * Get the timestamp of the youngest file
+     * 
+     * @param array $files
+     * @return int tstamp
+     */
+    protected function getYoungestFile($files) {
+        $tstamp = null;
+        foreach ($files as $file) {
+            $tstamp = is_null($tstamp) ? filemtime($file) : max($tstamp, filemtime($file));
+        }
+        return $tstamp;
+    }
+
 }
