@@ -44,7 +44,7 @@ class Aoe_JsCssTstamp_Model_Package extends Mage_Core_Model_Design_Package {
 
         // merge into target file
         $tstamp = $this->getYoungestFile($files);
-        $targetFilename = md5(implode(',', $files) . "|{$hostname}|{$port}") . $tstamp . '.css';
+        $targetFilename = md5(implode(',', $files) . "|{$hostname}|{$port}") . '.' . $tstamp . '.css';
         if ($this->_mergeFiles($files, $targetDir . DS . $targetFilename, false, array($this, 'beforeMergeCss'), 'css')) {
             return $baseMediaUrl . $mergerDir . '/' . $targetFilename;
         }
