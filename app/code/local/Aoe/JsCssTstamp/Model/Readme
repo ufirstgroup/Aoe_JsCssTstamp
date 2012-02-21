@@ -1,0 +1,5 @@
+v0.0.1 from http://www.fabrizio-branca.de/automatisches-versionieren-von-javascript-und-css-dateien-in-magento.html) 
+
+Really simple version, without DB, S3, ..., updated for Magento v1.10
+
+For more advanced versions, see other branches
